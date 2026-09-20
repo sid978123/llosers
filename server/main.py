@@ -19,7 +19,7 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 
-app = FastAPI(title="Lloserr PDF & Image Platform API")
+app = FastAPI(title="llosers PDF & Image Platform API")
 
 app.add_middleware(
     CORSMiddleware,

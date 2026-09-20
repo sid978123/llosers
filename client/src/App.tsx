@@ -26,12 +26,12 @@ export function App() {
         const found = getToolByRoute(pathname);
         if (found) {
           setCurrentTool(found);
-          document.title = `${found.name} — Lloserr PDF & Image Suite`;
+          document.title = `${found.name} — llosers PDF & Image Suite`;
           return;
         }
       }
       setCurrentTool(null);
-      document.title = "Lloserr — Modern PDF & Image Utility Platform";
+      document.title = "llosers — Modern PDF & Image Utility Platform";
     };
 
     handleLocation();
@@ -54,7 +54,7 @@ export function App() {
   const handleSelectTool = (tool: ToolDefinition) => {
     setCurrentTool(tool);
     window.history.pushState(null, "", tool.route);
-    document.title = `${tool.name} — Lloserr PDF & Image Suite`;
+    document.title = `${tool.name} — llosers PDF & Image Suite`;
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -62,7 +62,7 @@ export function App() {
     setCurrentTool(null);
     setHomeCategoryFilter("all");
     window.history.pushState(null, "", "/");
-    document.title = "Lloserr — Modern PDF & Image Utility Platform";
+    document.title = "llosers — Modern PDF & Image Utility Platform";
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
