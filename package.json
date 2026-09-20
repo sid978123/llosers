@@ -1,0 +1,14 @@
+{
+  "name": "lloserr-pdf-image-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-quality ephemeral PDF and Image utility suite with zero database.",
+  "scripts": {
+    "start": "npm run dev:frontend",
+    "dev": "npm run dev:frontend",
+    "dev:frontend": "cd client && npm run dev",
+    "dev:backend": "python -m uvicorn server.main:app --host 127.0.0.1 --port 8000 --reload",
+    "build:frontend": "cd client && npm run build",
+    "test:backend": "python tests/test_conversions.py"
+  }
+}
