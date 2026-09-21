@@ -100,10 +100,10 @@ export const ImageCropEditor: React.FC<ImageCropEditorProps> = ({ file, onCropCh
   };
 
   return (
-    <div className="p-4 bg-[#0E131F] rounded-2xl border border-white/[0.08] space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.08] pb-3">
+    <div className="p-4 bg-[var(--surface)] rounded-2xl border border-[var(--border)] shadow-[var(--card-shadow)] space-y-4 transition-colors duration-200">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
         <div className="flex items-center space-x-1.5">
-          <span className="text-[11px] font-mono text-[#64748B] mr-1">Aspect:</span>
+          <span className="text-[11px] font-mono text-[var(--text-muted)] mr-1">Aspect:</span>
           {(['free', '1:1', '16:9', '4:3'] as const).map(preset => (
             <button
               key={preset}
@@ -111,8 +111,8 @@ export const ImageCropEditor: React.FC<ImageCropEditorProps> = ({ file, onCropCh
               onClick={() => handlePresetChange(preset)}
               className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
                 aspectPreset === preset
-                  ? 'bg-[#161D2B] border border-[#00AB80]/50 text-[#00AB80]'
-                  : 'bg-[#111622] border border-white/[0.08] text-[#94A3B8] hover:text-white'
+                  ? 'bg-[var(--surface-hover)] border border-[var(--accent)]/50 text-[var(--accent)] shadow-sm'
+                  : 'bg-[var(--surface-subtle)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
               }`}
             >
               {preset === 'free' ? 'Freeform' : preset}
@@ -120,7 +120,7 @@ export const ImageCropEditor: React.FC<ImageCropEditorProps> = ({ file, onCropCh
           ))}
         </div>
 
-        <div className="flex items-center space-x-2.5 text-[11px] font-mono text-[#64748B]">
+        <div className="flex items-center space-x-2.5 text-[11px] font-mono text-[var(--text-muted)]">
           <span>Crop: {Math.round(crop.width)} × {Math.round(crop.height)} px</span>
           <span>•</span>
           <span>Original: {naturalSize.width} × {naturalSize.height} px</span>
@@ -130,7 +130,7 @@ export const ImageCropEditor: React.FC<ImageCropEditorProps> = ({ file, onCropCh
       {/* Preview Container */}
       <div 
         ref={containerRef}
-        className="relative bg-[#0A0D14] rounded-xl overflow-hidden border border-white/[0.08] flex items-center justify-center p-4 min-h-[280px]"
+        className="relative bg-[var(--surface-subtle)] rounded-xl overflow-hidden border border-[var(--border)] flex items-center justify-center p-4 min-h-[280px]"
       >
         {imageSrc && (
           <div className="relative max-w-full max-h-[360px] inline-block">
@@ -171,7 +171,7 @@ export const ImageCropEditor: React.FC<ImageCropEditorProps> = ({ file, onCropCh
       {/* Coordinate Sliders */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
         <div>
-          <label className="text-slate-400 block mb-1">X Offset ({Math.round(crop.x)}px)</label>
+          <label className="text-[var(--text-secondary)] block mb-1 font-medium">X Offset ({Math.round(crop.x)}px)</label>
           <input
             type="range"
             min={0}
@@ -183,11 +183,11 @@ export const ImageCropEditor: React.FC<ImageCropEditorProps> = ({ file, onCropCh
               setCrop(u);
               onCropChange(u);
             }}
-            className="w-full accent-indigo-500"
+            className="w-full accent-[#00AB80]"
           />
         </div>
         <div>
-          <label className="text-slate-400 block mb-1">Y Offset ({Math.round(crop.y)}px)</label>
+          <label className="text-[var(--text-secondary)] block mb-1 font-medium">Y Offset ({Math.round(crop.y)}px)</label>
           <input
             type="range"
             min={0}
@@ -199,29 +199,29 @@ export const ImageCropEditor: React.FC<ImageCropEditorProps> = ({ file, onCropCh
               setCrop(u);
               onCropChange(u);
             }}
-            className="w-full accent-indigo-500"
+            className="w-full accent-[#00AB80]"
           />
         </div>
         <div>
-          <label className="text-slate-400 block mb-1">Width ({Math.round(crop.width)}px)</label>
+          <label className="text-[var(--text-secondary)] block mb-1 font-medium">Width ({Math.round(crop.width)}px)</label>
           <input
             type="range"
             min={20}
             max={naturalSize.width}
             value={crop.width}
             onChange={(e) => handleWidthChange(parseInt(e.target.value, 10))}
-            className="w-full accent-indigo-500"
+            className="w-full accent-[#00AB80]"
           />
         </div>
         <div>
-          <label className="text-slate-400 block mb-1">Height ({Math.round(crop.height)}px)</label>
+          <label className="text-[var(--text-secondary)] block mb-1 font-medium">Height ({Math.round(crop.height)}px)</label>
           <input
             type="range"
             min={20}
             max={naturalSize.height}
             value={crop.height}
             onChange={(e) => handleHeightChange(parseInt(e.target.value, 10))}
-            className="w-full accent-indigo-500"
+            className="w-full accent-[#00AB80]"
           />
         </div>
       </div>

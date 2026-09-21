@@ -19,7 +19,7 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 
-app = FastAPI(title="llosers PDF & Image Platform API")
+app = FastAPI(title="LosersPdf PDF & Image Platform API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -29,7 +29,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-TEMP_DIR = os.path.join(tempfile.gettempdir(), "lloserr_tmp")
+TEMP_DIR = os.path.join(tempfile.gettempdir(), "loserspdf_tmp")
 os.makedirs(TEMP_DIR, exist_ok=True)
 
 def cleanup_file(path: str):

@@ -1,4 +1,4 @@
-# llosers — Production-Quality PDF & Image Utility Platform
+# LosersPdf — Production-Quality PDF & Image Utility Platform
 
 A modern, fast, minimalistic, and privacy-first PDF and image utility platform built for production workloads.
 

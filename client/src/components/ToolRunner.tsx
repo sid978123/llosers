@@ -581,38 +581,38 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
       <div className="space-y-3.5">
         <button
           onClick={onBack}
-          className="inline-flex items-center space-x-2 text-xs font-semibold text-[#94A3B8] hover:text-white transition-colors cursor-pointer"
+          className="inline-flex items-center space-x-2 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to all tools</span>
         </button>
 
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 p-6 sm:p-7 bg-[#0E131F] rounded-2xl border border-white/[0.08]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 p-6 sm:p-7 bg-[var(--surface)] rounded-2xl border border-[var(--border)] shadow-[var(--card-shadow)] transition-colors duration-200">
           <div className="flex items-start space-x-4">
-            <div className="w-12 h-12 rounded-xl bg-[#161D2B] border border-white/[0.08] flex items-center justify-center text-[#00AB80] shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] shrink-0 shadow-sm">
               <Icon className="w-6 h-6" />
             </div>
             <div>
               <div className="flex items-center space-x-2.5">
-                <h1 className="text-2xl sm:text-3xl font-bold text-[#F8FAFC] tracking-tight">
+                <h1 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)] tracking-tight">
                   {tool.name}
                 </h1>
-                <span className="px-2.5 py-0.5 text-[10px] font-mono text-[#94A3B8] bg-[#161D2B] border border-white/[0.08] rounded-md">
+                <span className="px-2.5 py-0.5 text-[10px] font-mono text-[var(--text-secondary)] bg-[var(--surface-subtle)] border border-[var(--border)] rounded-md">
                   {tool.subcategoryLabel}
                 </span>
               </div>
-              <p className="text-xs sm:text-sm text-[#94A3B8] mt-1.5 max-w-2xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-1.5 max-w-2xl leading-relaxed">
                 {tool.detailedDescription}
               </p>
             </div>
           </div>
 
-          <div className="flex sm:flex-col items-center sm:items-end justify-between text-xs text-[#94A3B8] space-y-2 shrink-0">
-            <span className="px-3 py-1.5 rounded-lg bg-[#161D2B] text-[#94A3B8] border border-white/[0.08] flex items-center space-x-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00AB80]" />
+          <div className="flex sm:flex-col items-center sm:items-end justify-between text-xs text-[var(--text-secondary)] space-y-2 shrink-0">
+            <span className="px-3 py-1.5 rounded-lg bg-[var(--surface-subtle)] text-[var(--text-secondary)] border border-[var(--border)] flex items-center space-x-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
               <span className="text-[10px] font-mono">{tool.processingMethod === 'client' ? 'In-Browser (Private)' : 'Ephemeral Server'}</span>
             </span>
-            <span className="text-[10px] text-[#64748B] font-mono">
+            <span className="text-[10px] text-[var(--text-muted)] font-mono">
               Output: .{tool.outputFormat}
             </span>
           </div>
@@ -633,10 +633,10 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
 
           {/* Contextual Tool Options / Interactive Config Panels */}
           {files.length > 0 && (
-            <div className="p-6 sm:p-7 bg-[#0E131F] rounded-2xl border border-white/[0.08] space-y-6 animate-in fade-in duration-150">
-              <div className="flex items-center space-x-2 border-b border-white/[0.08] pb-3.5">
-                <Settings className="w-4 h-4 text-[#00AB80]" />
-                <h3 className="text-xs font-semibold text-[#F8FAFC] uppercase tracking-wider font-mono">
+            <div className="p-6 sm:p-7 bg-[var(--surface)] rounded-2xl border border-[var(--border)] shadow-[var(--card-shadow)] space-y-6 animate-in fade-in duration-150 transition-colors duration-200">
+              <div className="flex items-center space-x-2 border-b border-[var(--border)] pb-3.5">
+                <Settings className="w-4 h-4 text-[var(--accent)]" />
+                <h3 className="text-xs font-semibold text-[var(--text-primary)] uppercase tracking-wider font-mono">
                   Tool Settings & Preview
                 </h3>
               </div>
@@ -650,8 +650,8 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                       onClick={() => setSplitMode('all')}
                       className={`px-3.5 py-2 text-xs font-medium rounded-xl border transition-all cursor-pointer ${
                         splitMode === 'all'
-                          ? 'bg-[#161D2B] border-[#00AB80]/50 text-[#00AB80]'
-                          : 'bg-[#111622] border-white/[0.08] text-[#94A3B8] hover:text-white'
+                          ? 'bg-[var(--surface-hover)] border-[var(--accent)]/50 text-[var(--accent)] shadow-sm'
+                          : 'bg-[var(--surface-subtle)] border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
                       }`}
                     >
                       Extract all pages into separate files (ZIP)
@@ -661,8 +661,8 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                       onClick={() => setSplitMode('custom')}
                       className={`px-3.5 py-2 text-xs font-medium rounded-xl border transition-all cursor-pointer ${
                         splitMode === 'custom'
-                          ? 'bg-[#161D2B] border-[#00AB80]/50 text-[#00AB80]'
-                          : 'bg-[#111622] border-white/[0.08] text-[#94A3B8] hover:text-white'
+                          ? 'bg-[var(--surface-hover)] border-[var(--accent)]/50 text-[var(--accent)] shadow-sm'
+                          : 'bg-[var(--surface-subtle)] border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
                       }`}
                     >
                       Split by page ranges
@@ -670,14 +670,14 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                   </div>
                   {splitMode === 'custom' && (
                     <div>
-                      <label className="text-xs text-slate-300 block mb-1">
+                      <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">
                         Page Ranges (e.g. "1-3, 4, 5-8"):
                       </label>
                       <input
                         type="text"
                         value={splitRanges}
                         onChange={(e) => setSplitRanges(e.target.value)}
-                        className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm"
+                        className="w-full px-3.5 py-2.5 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] text-sm focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/15"
                         placeholder="1-2, 3-5"
                       />
                     </div>
@@ -694,7 +694,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                     onSelectionChange={setSelectedPages}
                   />
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">
                       Or type comma-separated page numbers:
                     </label>
                     <input
@@ -702,7 +702,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                       value={pageInputText}
                       onChange={(e) => setPageInputText(e.target.value)}
                       placeholder="e.g. 1, 3, 5"
-                      className="w-full px-3.5 py-2 bg-white/5 border border-white/10 rounded-xl text-white text-sm"
+                      className="w-full px-3.5 py-2 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] text-sm focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/15"
                     />
                   </div>
                 </div>
@@ -720,7 +720,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
               {/* 4. ROTATE PDF CONTROLS */}
               {tool.id === 'rotate-pdf' && (
                 <div className="space-y-3">
-                  <label className="text-xs text-slate-300 block">Rotate All Pages By:</label>
+                  <label className="text-xs text-[var(--text-secondary)] block font-medium">Rotate All Pages By:</label>
                   <div className="flex flex-wrap gap-2">
                     {[90, 180, 270].map(deg => (
                       <button
@@ -729,8 +729,8 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                         onClick={() => setRotatePdfAngle(deg)}
                         className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${
                           rotatePdfAngle === deg
-                            ? 'bg-[#161D2B] border-[#00AB80]/50 text-[#00AB80]'
-                            : 'bg-[#111622] border-white/[0.08] text-[#94A3B8] hover:text-white'
+                            ? 'bg-[var(--surface-hover)] border-[var(--accent)]/50 text-[var(--accent)] shadow-sm'
+                            : 'bg-[var(--surface-subtle)] border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
                         }`}
                       >
                         <RotateCw className="w-3.5 h-3.5" />
@@ -745,11 +745,11 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
               {tool.id === 'add-page-numbers' && (
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Position</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Position</label>
                     <select
                       value={pageNumberPos}
                       onChange={(e) => setPageNumberPos(e.target.value as any)}
-                      className="w-full px-3 py-2 bg-slate-900 border border-white/10 rounded-xl text-white text-xs"
+                      className="w-full px-3 py-2 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] text-xs focus:border-[var(--accent)] focus:outline-none"
                     >
                       <option value="bottom-center">Bottom Center</option>
                       <option value="bottom-right">Bottom Right</option>
@@ -757,11 +757,11 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Format</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Format</label>
                     <select
                       value={pageNumberFormat}
                       onChange={(e) => setPageNumberFormat(e.target.value as any)}
-                      className="w-full px-3 py-2 bg-slate-900 border border-white/10 rounded-xl text-white text-xs"
+                      className="w-full px-3 py-2 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] text-xs focus:border-[var(--accent)] focus:outline-none"
                     >
                       <option value="page-x-of-y">Page X of Y</option>
                       <option value="number-only">Page Number Only (X)</option>
@@ -769,14 +769,14 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Font Size ({pageNumberFontSize}pt)</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Font Size ({pageNumberFontSize}pt)</label>
                     <input
                       type="range"
                       min={8}
                       max={18}
                       value={pageNumberFontSize}
                       onChange={(e) => setPageNumberFontSize(parseInt(e.target.value, 10))}
-                      className="w-full accent-indigo-500 mt-2"
+                      className="w-full accent-[#00AB80] mt-2"
                     />
                   </div>
                 </div>
@@ -786,21 +786,21 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
               {tool.id === 'watermark-pdf' && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Watermark Text</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Watermark Text</label>
                     <input
                       type="text"
                       value={watermarkText}
                       onChange={(e) => setWatermarkText(e.target.value)}
-                      className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white text-xs"
+                      className="w-full px-3 py-2 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] text-xs focus:border-[var(--accent)] focus:outline-none"
                       placeholder="CONFIDENTIAL"
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Angle ({watermarkAngle}°)</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Angle ({watermarkAngle}°)</label>
                     <select
                       value={watermarkAngle}
                       onChange={(e) => setWatermarkAngle(parseInt(e.target.value, 10))}
-                      className="w-full px-3 py-2 bg-slate-900 border border-white/10 rounded-xl text-white text-xs"
+                      className="w-full px-3 py-2 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] text-xs focus:border-[var(--accent)] focus:outline-none"
                     >
                       <option value={45}>45° Diagonal</option>
                       <option value={0}>0° Horizontal</option>
@@ -808,18 +808,18 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Opacity ({Math.round(watermarkOpacity * 100)}%)</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Opacity ({Math.round(watermarkOpacity * 100)}%)</label>
                     <input
                       type="range"
                       min={10}
                       max={100}
                       value={Math.round(watermarkOpacity * 100)}
                       onChange={(e) => setWatermarkOpacity(parseInt(e.target.value, 10) / 100)}
-                      className="w-full accent-indigo-500 mt-2"
+                      className="w-full accent-[#00AB80] mt-2"
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Color</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Color</label>
                     <div className="flex items-center space-x-2">
                       <input
                         type="color"
@@ -827,7 +827,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                         onChange={(e) => setWatermarkColor(e.target.value)}
                         className="w-8 h-8 rounded border-0 bg-transparent cursor-pointer"
                       />
-                      <span className="text-xs font-mono text-slate-300">{watermarkColor}</span>
+                      <span className="text-xs font-mono text-[var(--text-secondary)]">{watermarkColor}</span>
                     </div>
                   </div>
                 </div>
@@ -837,23 +837,23 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
               {tool.id === 'protect-pdf' && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Set Password</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Set Password</label>
                     <input
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter strong password..."
-                      className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm"
+                      className="w-full px-3.5 py-2.5 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] text-sm focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/15"
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Confirm Password</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Confirm Password</label>
                     <input
                       type="password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="Re-enter password..."
-                      className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm"
+                      className="w-full px-3.5 py-2.5 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] text-sm focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/15"
                     />
                   </div>
                 </div>
@@ -862,13 +862,13 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
               {/* 8. UNLOCK PDF */}
               {tool.id === 'unlock-pdf' && (
                 <div className="max-w-md">
-                  <label className="text-xs text-slate-300 block mb-1">PDF Password</label>
+                  <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">PDF Password</label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter existing password to decrypt..."
-                    className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm"
+                    className="w-full px-3.5 py-2.5 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] text-sm focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/15"
                   />
                 </div>
               )}
@@ -876,14 +876,14 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
               {/* 9. SIGN PDF */}
               {tool.id === 'sign-pdf' && (
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-3 text-xs text-slate-300">
-                    <span>Page to sign:</span>
+                  <div className="flex items-center space-x-3 text-xs text-[var(--text-secondary)]">
+                    <span className="font-medium">Page to sign:</span>
                     <input
                       type="number"
                       min={1}
                       value={signPageNum}
                       onChange={(e) => setSignPageNum(Math.max(1, parseInt(e.target.value, 10) || 1))}
-                      className="w-20 px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-white font-mono"
+                      className="w-20 px-2 py-1 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-lg text-[var(--text-primary)] font-mono focus:border-[var(--accent)] focus:outline-none"
                     />
                   </div>
                   <SignaturePad onSignatureCapture={setSignatureDataUrl} />
@@ -898,9 +898,9 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
               {/* 11. COMPRESS IMAGE */}
               {tool.id === 'compress-image' && (
                 <div className="space-y-3">
-                  <div className="flex justify-between text-xs text-slate-300">
+                  <div className="flex justify-between text-xs text-[var(--text-secondary)] font-medium">
                     <span>Compression Quality: {compressQuality}%</span>
-                    <span className="text-indigo-400 font-medium">Estimated savings: ~{100 - compressQuality}%</span>
+                    <span className="text-[var(--accent)] font-semibold">Estimated savings: ~{100 - compressQuality}%</span>
                   </div>
                   <input
                     type="range"
@@ -908,9 +908,9 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                     max={95}
                     value={compressQuality}
                     onChange={(e) => setCompressQuality(parseInt(e.target.value, 10))}
-                    className="w-full accent-indigo-500"
+                    className="w-full accent-[#00AB80]"
                   />
-                  <div className="flex justify-between text-[11px] text-slate-400">
+                  <div className="flex justify-between text-[11px] text-[var(--text-muted)]">
                     <span>Smaller File Size (10%)</span>
                     <span>High Quality (95%)</span>
                   </div>
@@ -922,7 +922,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs text-slate-300 block mb-1">Width (px)</label>
+                      <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Width (px)</label>
                       <input
                         type="number"
                         value={resizeWidth}
@@ -933,11 +933,11 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                             setResizeHeight(Math.round(w / imageAspectRatio));
                           }
                         }}
-                        className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white font-mono text-sm"
+                        className="w-full px-3 py-2 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] font-mono text-sm focus:border-[var(--accent)] focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-slate-300 block mb-1">Height (px)</label>
+                      <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Height (px)</label>
                       <input
                         type="number"
                         value={resizeHeight}
@@ -948,7 +948,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                             setResizeWidth(Math.round(h * imageAspectRatio));
                           }
                         }}
-                        className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white font-mono text-sm"
+                        className="w-full px-3 py-2 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] font-mono text-sm focus:border-[var(--accent)] focus:outline-none"
                       />
                     </div>
                   </div>
@@ -959,9 +959,9 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                       id="ratio-check"
                       checked={maintainAspectRatio}
                       onChange={(e) => setMaintainAspectRatio(e.target.checked)}
-                      className="rounded border-white/20 bg-white/5 text-indigo-600 focus:ring-indigo-500"
+                      className="rounded border-[var(--border)] bg-[var(--surface-subtle)] text-[var(--accent)] focus:ring-[var(--accent)] accent-[#00AB80]"
                     />
-                    <label htmlFor="ratio-check" className="text-xs text-slate-300 cursor-pointer">
+                    <label htmlFor="ratio-check" className="text-xs text-[var(--text-secondary)] cursor-pointer select-none">
                       Lock aspect ratio
                     </label>
                   </div>
@@ -976,7 +976,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
               {/* 14. ROTATE IMAGE */}
               {tool.id === 'rotate-image' && (
                 <div className="space-y-3">
-                  <label className="text-xs text-slate-300 block">Orientation & Mirror:</label>
+                  <label className="text-xs text-[var(--text-secondary)] block font-medium">Orientation & Mirror:</label>
                   <div className="flex flex-wrap gap-2">
                     {[90, 180, 270].map(deg => (
                       <button
@@ -985,8 +985,8 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                         onClick={() => setRotateImgAngle(deg)}
                         className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${
                           rotateImgAngle === deg
-                            ? 'bg-[#161D2B] border-[#00AB80]/50 text-[#00AB80]'
-                            : 'bg-[#111622] border-white/[0.08] text-[#94A3B8] hover:text-white'
+                            ? 'bg-[var(--surface-hover)] border-[var(--accent)]/50 text-[var(--accent)] shadow-sm'
+                            : 'bg-[var(--surface-subtle)] border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
                         }`}
                       >
                         Rotate {deg}°
@@ -996,7 +996,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                       type="button"
                       onClick={() => setFlipH(!flipH)}
                       className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${
-                        flipH ? 'bg-[#161D2B] border-[#00AB80]/50 text-[#00AB80]' : 'bg-[#111622] border-white/[0.08] text-[#94A3B8] hover:text-white'
+                        flipH ? 'bg-[var(--surface-hover)] border-[var(--accent)]/50 text-[var(--accent)] shadow-sm' : 'bg-[var(--surface-subtle)] border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
                       }`}
                     >
                       Flip Horizontal
@@ -1005,7 +1005,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                       type="button"
                       onClick={() => setFlipV(!flipV)}
                       className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${
-                        flipV ? 'bg-[#161D2B] border-[#00AB80]/50 text-[#00AB80]' : 'bg-[#111622] border-white/[0.08] text-[#94A3B8] hover:text-white'
+                        flipV ? 'bg-[var(--surface-hover)] border-[var(--accent)]/50 text-[var(--accent)] shadow-sm' : 'bg-[var(--surface-subtle)] border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
                       }`}
                     >
                       Flip Vertical
@@ -1018,18 +1018,18 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
               {tool.id === 'png-to-jpg' && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Quality ({pngToJpgQuality}%)</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Quality ({pngToJpgQuality}%)</label>
                     <input
                       type="range"
                       min={40}
                       max={100}
                       value={pngToJpgQuality}
                       onChange={(e) => setPngToJpgQuality(parseInt(e.target.value, 10))}
-                      className="w-full accent-indigo-500 mt-2"
+                      className="w-full accent-[#00AB80] mt-2"
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-slate-300 block mb-1">Background Fill for Transparency</label>
+                    <label className="text-xs text-[var(--text-secondary)] block mb-1 font-medium">Background Fill for Transparency</label>
                     <div className="flex items-center space-x-2">
                       <input
                         type="color"
@@ -1037,18 +1037,18 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                         onChange={(e) => setPngToJpgBgColor(e.target.value)}
                         className="w-8 h-8 rounded border-0 bg-transparent cursor-pointer"
                       />
-                      <span className="text-xs font-mono text-slate-300">{pngToJpgBgColor}</span>
+                      <span className="text-xs font-mono text-[var(--text-secondary)]">{pngToJpgBgColor}</span>
                     </div>
                   </div>
                 </div>
               )}
 
               {/* Action Button */}
-              <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
+              <div className="pt-4 border-t border-[var(--border)] flex items-center justify-between">
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="px-4 py-2.5 text-xs font-medium text-[#94A3B8] hover:text-white rounded-xl bg-[#111622] hover:bg-[#161D2B] border border-white/[0.08] transition-colors cursor-pointer"
+                  className="px-4 py-2.5 text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-xl bg-[var(--surface-subtle)] hover:bg-[var(--surface-hover)] border border-[var(--border)] transition-colors cursor-pointer shadow-sm"
                 >
                   Clear & Choose other file
                 </button>
@@ -1057,7 +1057,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
                   type="button"
                   disabled={processing}
                   onClick={handleProcess}
-                  className="flex items-center space-x-2 px-6 py-3 text-xs sm:text-sm font-semibold rounded-xl text-white bg-[#00AB80] hover:bg-[#009670] shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  className="flex items-center space-x-2 px-6 py-3 text-xs sm:text-sm font-semibold rounded-xl text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {processing ? (
                     <>
@@ -1077,41 +1077,41 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
 
           {/* Error Message */}
           {error && (
-            <div className="p-4 rounded-xl bg-[#EF4444]/10 border border-[#EF4444]/20 text-[#F87171] text-xs flex items-start space-x-3">
-              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-[#EF4444]" />
+            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs flex items-start space-x-3">
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-500" />
               <div>
-                <p className="font-semibold text-[#FECACA]">Operation failed</p>
-                <p className="mt-0.5 text-[#F87171]">{error}</p>
+                <p className="font-semibold text-red-700 dark:text-red-300">Operation failed</p>
+                <p className="mt-0.5 text-red-600 dark:text-red-400">{error}</p>
               </div>
             </div>
           )}
         </div>
       ) : (
         /* Result / Success View */
-        <div className="p-8 sm:p-12 bg-[#0E131F] rounded-2xl border border-white/[0.08] text-center space-y-6 animate-in zoom-in-95 duration-150">
-          <div className="w-14 h-14 rounded-2xl bg-[#00AB80]/15 border border-[#00AB80]/30 flex items-center justify-center mx-auto text-[#00AB80]">
+        <div className="p-8 sm:p-12 bg-[var(--surface)] rounded-2xl border border-[var(--border)] shadow-[var(--card-shadow)] text-center space-y-6 animate-in zoom-in-95 duration-150 transition-colors duration-200">
+          <div className="w-14 h-14 rounded-2xl bg-[var(--accent-subtle)] border border-[var(--accent-border)] flex items-center justify-center mx-auto text-[var(--accent)]">
             <CheckCircle2 className="w-7 h-7" />
           </div>
 
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-[#F8FAFC] tracking-tight">
+            <h2 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight">
               Ready for Download
             </h2>
-            <p className="text-xs sm:text-sm text-[#94A3B8] max-w-md mx-auto">
+            <p className="text-xs sm:text-sm text-[var(--text-secondary)] max-w-md mx-auto">
               Your file has been processed in memory and is ready for immediate retrieval.
             </p>
           </div>
 
           {/* File summary badge */}
-          <div className="inline-flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-3 px-5 py-3 rounded-xl bg-[#111622] border border-white/[0.08] text-xs font-mono text-[#94A3B8]">
-            <span className="font-medium text-[#F8FAFC] truncate max-w-xs">
+          <div className="inline-flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-3 px-5 py-3 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)] text-xs font-mono text-[var(--text-secondary)] shadow-sm">
+            <span className="font-medium text-[var(--text-primary)] truncate max-w-xs">
               {result.filename}
             </span>
             {result.newSize && (
               <span>Size: {formatBytes(result.newSize)}</span>
             )}
             {result.savingsPct !== undefined && result.savingsPct > 0 && (
-              <span className="text-[#00AB80] font-semibold">
+              <span className="text-[var(--accent)] font-semibold">
                 ({result.savingsPct}% reduction)
               </span>
             )}
@@ -1121,7 +1121,7 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
             <button
               onClick={handleDownload}
-              className="flex items-center justify-center space-x-2 px-7 py-3 rounded-xl font-semibold text-xs sm:text-sm text-white bg-[#00AB80] hover:bg-[#009670] shadow-md transition-all w-full sm:w-auto cursor-pointer"
+              className="flex items-center justify-center space-x-2 px-7 py-3 rounded-xl font-semibold text-xs sm:text-sm text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] shadow-md transition-all w-full sm:w-auto cursor-pointer"
             >
               <Download className="w-4 h-4" />
               <span>Download {result.filename?.endsWith('.zip') ? 'ZIP Archive' : 'File'}</span>
@@ -1129,14 +1129,14 @@ export const ToolRunner: React.FC<ToolRunnerProps> = ({ tool, onBack }) => {
 
             <button
               onClick={handleReset}
-              className="flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium text-xs sm:text-sm text-[#94A3B8] hover:text-white bg-[#111622] hover:bg-[#161D2B] border border-white/[0.08] transition-colors w-full sm:w-auto cursor-pointer"
+              className="flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-medium text-xs sm:text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--surface-subtle)] hover:bg-[var(--surface-hover)] border border-[var(--border)] transition-colors w-full sm:w-auto cursor-pointer shadow-sm"
             >
               <RefreshCw className="w-4 h-4" />
               <span>Process Another Document</span>
             </button>
           </div>
 
-          <p className="text-[10px] font-mono text-[#64748B] pt-2">
+          <p className="text-[10px] font-mono text-[var(--text-muted)] pt-2">
             🔒 Ephemeral Guarantee: Buffer memory freed immediately following download.
           </p>
         </div>

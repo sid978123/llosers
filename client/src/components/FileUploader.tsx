@@ -82,10 +82,10 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => inputRef.current?.click()}
-        className={`relative border-2 border-dashed rounded-2xl p-10 sm:p-14 text-center cursor-pointer transition-all duration-200 ${
+        className={`relative border-2 border-dashed rounded-2xl p-10 sm:p-14 text-center cursor-pointer transition-all duration-200 shadow-[var(--card-shadow)] ${
           isDragOver
-            ? "border-[#00AB80] bg-[#00AB80]/[0.08] scale-[1.005]"
-            : "border-white/[0.12] hover:border-[#00AB80]/60 bg-[#0E131F] hover:bg-[#111622]"
+            ? "border-[var(--accent)] bg-[var(--accent-subtle)] scale-[1.005]"
+            : "border-[var(--border)] hover:border-[var(--accent)]/60 bg-[var(--surface)] hover:bg-[var(--surface-hover)]"
         }`}
       >
         <input
@@ -98,24 +98,24 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
         />
 
         <div className="flex flex-col items-center justify-center space-y-4">
-          <div className="w-14 h-14 rounded-2xl bg-[#161D2B] border border-white/[0.08] flex items-center justify-center text-[#00AB80] transition-transform group-hover:scale-105">
+          <div className="w-14 h-14 rounded-2xl bg-[var(--surface-subtle)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] transition-transform group-hover:scale-105 shadow-sm">
             <UploadCloud className="w-7 h-7" />
           </div>
 
           <div>
-            <p className="text-base font-semibold text-[#F8FAFC]">
+            <p className="text-base font-semibold text-[var(--text-primary)]">
               {title ||
                 (multiple
                   ? "Drop documents here or click to browse"
                   : "Drop your document here or click to browse")}
             </p>
-            <p className="text-xs text-[#94A3B8] mt-1.5 font-mono">
+            <p className="text-xs text-[var(--text-secondary)] mt-1.5 font-mono">
               {subtitle || `Accepted formats: ${acceptedFormats.join(", ")}`}
             </p>
           </div>
 
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-[#94A3B8] bg-[#0A0D14] px-3.5 py-1.5 rounded-full border border-white/[0.08]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00AB80]" />
+          <div className="flex items-center space-x-2 text-[11px] font-mono text-[var(--text-secondary)] bg-[var(--surface-subtle)] px-3.5 py-1.5 rounded-full border border-[var(--border)]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
             <span>Ephemeral buffer processing • Never written to database</span>
           </div>
         </div>
@@ -124,7 +124,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
       {/* Selected Files List */}
       {files.length > 0 && (
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs text-[#94A3B8] px-1">
+          <div className="flex items-center justify-between text-xs text-[var(--text-secondary)] px-1">
             <span className="font-mono text-[11px]">
               Selected ({files.length} {files.length === 1 ? "file" : "files"})
             </span>
@@ -132,7 +132,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
               <button
                 type="button"
                 onClick={() => inputRef.current?.click()}
-                className="flex items-center space-x-1 text-xs text-[#00AB80] hover:text-[#009670] font-medium cursor-pointer"
+                className="flex items-center space-x-1 text-xs text-[var(--accent)] hover:text-[var(--accent-hover)] font-medium cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add another file</span>
@@ -144,17 +144,17 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
             {files.map((file, idx) => (
               <div
                 key={`${file.name}-${idx}`}
-                className="flex items-center justify-between p-3 rounded-xl bg-[#0E131F] border border-white/[0.08]"
+                className="flex items-center justify-between p-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-sm"
               >
                 <div className="flex items-center space-x-3 overflow-hidden">
-                  <div className="p-2 rounded-lg bg-[#161D2B] border border-white/[0.08] text-[#00AB80] shrink-0">
+                  <div className="p-2 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)] text-[var(--accent)] shrink-0">
                     <FileIcon className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-medium text-[#F8FAFC] truncate">
+                    <p className="text-xs font-medium text-[var(--text-primary)] truncate">
                       {file.name}
                     </p>
-                    <p className="text-[10px] text-[#64748B] font-mono">
+                    <p className="text-[10px] text-[var(--text-muted)] font-mono">
                       {formatBytes(file.size)}
                     </p>
                   </div>
@@ -166,7 +166,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
                     e.stopPropagation();
                     handleRemoveFile(idx);
                   }}
-                  className="p-1.5 text-[#64748B] hover:text-[#EF4444] rounded-lg hover:bg-white/[0.05] transition-colors shrink-0 ml-2 cursor-pointer"
+                  className="p-1.5 text-[var(--text-muted)] hover:text-red-500 rounded-lg hover:bg-[var(--surface-hover)] transition-colors shrink-0 ml-2 cursor-pointer"
                   title="Remove file"
                 >
                   <X className="w-4 h-4" />

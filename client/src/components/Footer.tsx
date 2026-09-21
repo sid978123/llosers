@@ -1,5 +1,5 @@
 import React from "react";
-import { Layers, ShieldCheck } from "lucide-react";
+import { Layers } from "lucide-react";
 import {
   getTotalToolsCount,
   getPdfToolsCount,
@@ -24,99 +24,119 @@ export const Footer: React.FC<FooterProps> = ({
   const imageTools = getToolsByCategory("image");
 
   return (
-    <footer className="border-t border-white/[0.08] bg-[#07090E] text-[#94A3B8] text-xs">
+    <footer className="border-t border-[var(--border)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] text-xs transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand Col */}
           <div className="space-y-4 md:col-span-2">
-            <button
-              onClick={onNavigateHome}
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateHome();
+              }}
               className="flex items-center space-x-2.5 text-left focus:outline-none cursor-pointer group"
             >
-              <div className="w-8 h-8 rounded-lg bg-[#111622] border border-white/[0.08] flex items-center justify-center text-[#00AB80] group-hover:border-[#00AB80]/40 transition-colors">
+              <div className="w-8 h-8 rounded-lg bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] group-hover:border-[var(--accent)]/40 transition-colors shadow-sm">
                 <Layers className="w-4 h-4" />
               </div>
               <div className="flex flex-col">
-                <span className="text-base font-semibold text-white tracking-tight leading-none">
-                  llosers
+                <span className="text-base font-semibold text-[var(--text-primary)] tracking-tight leading-none">
+                  LosersPdf
                 </span>
-                <span className="text-[10px] text-[#64748B] tracking-wider uppercase font-mono mt-0.5">
+                <span className="text-[10px] text-[var(--text-muted)] tracking-wider uppercase font-mono mt-0.5">
                   Document Studio
                 </span>
               </div>
-            </button>
-            <p className="text-xs text-[#94A3B8] max-w-sm leading-relaxed">
+            </a>
+            <p className="text-xs text-[var(--text-secondary)] max-w-sm leading-relaxed">
               Professional, minimalist PDF and image processing suite.
               Engineered with zero-knowledge ephemerality, strict privacy
               standards, and instant client-side execution.
             </p>
-            <div className="flex items-center space-x-2 text-[11px] font-mono text-[#64748B]">
-              <span className="w-2 h-2 rounded-full bg-[#00AB80] shadow-[0_0_8px_rgba(0,171,128,0.4)]" />
+            <div className="flex items-center space-x-2 text-[11px] font-mono text-[var(--text-muted)]">
+              <span className="w-2 h-2 rounded-full bg-[var(--accent)] shadow-[0_0_8px_rgba(0,171,128,0.4)]" />
               <span>Zero Retention Guarantee • Complete Ephemerality</span>
             </div>
           </div>
 
           {/* Popular PDF Tools Col */}
           <div className="space-y-3">
-            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-white">
+            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)]">
               PDF Suite ({getPdfToolsCount()})
             </h4>
             <ul className="space-y-2 pt-1 text-xs">
               {pdfTools.slice(0, 6).map((tool) => (
                 <li key={tool.id}>
-                  <button
-                    onClick={() => onSelectTool(tool)}
-                    className="hover:text-white transition-colors text-left cursor-pointer"
+                  <a
+                    href={tool.route}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onSelectTool(tool);
+                    }}
+                    className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-left cursor-pointer block"
                   >
                     {tool.name}
-                  </button>
+                  </a>
                 </li>
               ))}
               <li className="pt-1.5">
-                <button
-                  onClick={onOpenAllTools}
-                  className="text-[#00AB80] hover:text-[#00C997] font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
+                <a
+                  href="/pdf-tools"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onOpenAllTools();
+                  }}
+                  className="text-[var(--accent)] hover:text-[var(--accent-hover)] font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
                 >
                   <span>View all PDF tools</span>
                   <span>→</span>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Image Tools Col */}
           <div className="space-y-3">
-            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-white">
+            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)]">
               Image Suite ({getImageToolsCount()})
             </h4>
             <ul className="space-y-2 pt-1 text-xs">
               {imageTools.slice(0, 6).map((tool) => (
                 <li key={tool.id}>
-                  <button
-                    onClick={() => onSelectTool(tool)}
-                    className="hover:text-white transition-colors text-left cursor-pointer"
+                  <a
+                    href={tool.route}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onSelectTool(tool);
+                    }}
+                    className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-left cursor-pointer block"
                   >
                     {tool.name}
-                  </button>
+                  </a>
                 </li>
               ))}
               <li className="pt-1.5">
-                <button
-                  onClick={onOpenAllTools}
-                  className="text-[#00AB80] hover:text-[#00C997] font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
+                <a
+                  href="/image-tools"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onOpenAllTools();
+                  }}
+                  className="text-[var(--accent)] hover:text-[var(--accent-hover)] font-medium transition-colors cursor-pointer inline-flex items-center gap-1"
                 >
                   <span>View all Image tools</span>
                   <span>→</span>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#64748B] font-mono">
+        <div className="pt-6 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[var(--text-muted)] font-mono">
           <p>
-            © {new Date().getFullYear()} llosers Document Studio. All rights
+            © {new Date().getFullYear()} LosersPdf Document Studio. All rights
             reserved.
           </p>
           <div className="flex items-center space-x-3 text-[11px]">
@@ -130,24 +150,24 @@ export const Footer: React.FC<FooterProps> = ({
       </div>
 
       {/* Ambient Bird Animation */}
-      <div className="relative h-24 overflow-hidden border-t border-white/[0.04]">
+      <div className="relative h-24 overflow-hidden border-t border-[var(--border-subtle)]">
         {/* Flight path */}
         <div
           className="
-      absolute
-      left-0
-      right-0
-      bottom-7
-      h-px
-      bg-gradient-to-r
-      from-transparent
-      via-white/[0.06]
-      to-transparent
-    "
+            absolute
+            left-0
+            right-0
+            bottom-7
+            h-px
+            bg-gradient-to-r
+            from-transparent
+            via-[var(--border)]
+            to-transparent
+          "
         />
 
         {/* Bird */}
-        <div className="footer-bird absolute bottom-8 left-[-40px]">
+        <div className="footer-bird absolute bottom-8 left-[-40px] text-[var(--text-muted)] opacity-60 dark:opacity-80">
           <svg
             width="34"
             height="24"
@@ -180,7 +200,7 @@ export const Footer: React.FC<FooterProps> = ({
             />
 
             {/* Eye */}
-            <circle cx="24.5" cy="7" r="0.7" fill="#070A0F" />
+            <circle cx="24.5" cy="7" r="0.7" fill="var(--bg)" />
           </svg>
         </div>
 

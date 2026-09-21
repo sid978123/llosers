@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://loserspdf.vercel.app/sitemap.xml

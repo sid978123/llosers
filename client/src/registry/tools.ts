@@ -598,9 +598,18 @@ export const getPopularTools = (): ToolDefinition[] =>
 export const getToolById = (id: string): ToolDefinition | undefined => 
   TOOLS_REGISTRY.find(t => t.id === id);
 
+const ROUTE_ALIASES: Record<string, string> = {
+  '/compress-pdf': '/compress-image',
+  '/pdf-to-excel': '/excel-to-pdf',
+};
+
 export const getToolByRoute = (route: string): ToolDefinition | undefined => {
-  const cleanRoute = route.startsWith('/') ? route : `/${route}`;
-  return TOOLS_REGISTRY.find(t => t.route === cleanRoute);
+  let cleanRoute = route.startsWith('/') ? route : `/${route}`;
+  if (cleanRoute.length > 1 && cleanRoute.endsWith('/')) {
+    cleanRoute = cleanRoute.slice(0, -1);
+  }
+  const targetRoute = ROUTE_ALIASES[cleanRoute] || cleanRoute;
+  return TOOLS_REGISTRY.find(t => t.route === targetRoute);
 };
 
 export const searchTools = (query: string): ToolDefinition[] => {

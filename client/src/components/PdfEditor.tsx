@@ -95,9 +95,9 @@ export const PdfEditor: React.FC<PdfEditorProps> = ({ file, onEditsChange }) => 
 
   if (loading) {
     return (
-      <div className="p-12 flex flex-col items-center justify-center space-y-3 glass-panel rounded-2xl border border-white/10">
-        <Loader2 className="w-8 h-8 text-indigo-400 animate-spin" />
-        <p className="text-sm text-slate-300">Loading document pages into canvas editor...</p>
+      <div className="p-12 flex flex-col items-center justify-center space-y-3 glass-panel rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+        <Loader2 className="w-8 h-8 text-[var(--accent)] animate-spin" />
+        <p className="text-sm text-[var(--text-secondary)]">Loading document pages into canvas editor...</p>
       </div>
     );
   }
@@ -107,13 +107,13 @@ export const PdfEditor: React.FC<PdfEditorProps> = ({ file, onEditsChange }) => 
   return (
     <div className="space-y-4">
       {/* Editor Toolbar */}
-      <div className="p-3 bg-[#0E131F] rounded-xl border border-white/[0.08] flex flex-wrap items-center justify-between gap-3">
+      <div className="p-3 bg-[var(--surface)] rounded-xl border border-[var(--border)] flex flex-wrap items-center justify-between gap-3 shadow-sm transition-colors duration-200">
         <div className="flex items-center space-x-1.5">
           <button
             type="button"
             onClick={() => setToolMode('text')}
             className={`flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
-              toolMode === 'text' ? 'bg-[#161D2B] border border-[#00AB80]/50 text-[#00AB80]' : 'bg-[#111622] border border-white/[0.08] text-[#94A3B8] hover:text-white'
+              toolMode === 'text' ? 'bg-[var(--surface-hover)] border border-[var(--accent)]/50 text-[var(--accent)] shadow-sm' : 'bg-[var(--surface-subtle)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
             }`}
           >
             <Type className="w-3.5 h-3.5" />
@@ -123,7 +123,7 @@ export const PdfEditor: React.FC<PdfEditorProps> = ({ file, onEditsChange }) => 
             type="button"
             onClick={() => setToolMode('highlight')}
             className={`flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
-              toolMode === 'highlight' ? 'bg-[#161D2B] border border-[#00AB80]/50 text-[#00AB80]' : 'bg-[#111622] border border-white/[0.08] text-[#94A3B8] hover:text-white'
+              toolMode === 'highlight' ? 'bg-[var(--surface-hover)] border border-[var(--accent)]/50 text-[var(--accent)] shadow-sm' : 'bg-[var(--surface-subtle)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
             }`}
           >
             <Highlighter className="w-3.5 h-3.5" />
@@ -133,7 +133,7 @@ export const PdfEditor: React.FC<PdfEditorProps> = ({ file, onEditsChange }) => 
             type="button"
             onClick={() => setToolMode('rectangle')}
             className={`flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
-              toolMode === 'rectangle' ? 'bg-[#161D2B] border border-[#00AB80]/50 text-[#00AB80]' : 'bg-[#111622] border border-white/[0.08] text-[#94A3B8] hover:text-white'
+              toolMode === 'rectangle' ? 'bg-[var(--surface-hover)] border border-[var(--accent)]/50 text-[var(--accent)] shadow-sm' : 'bg-[var(--surface-subtle)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
             }`}
           >
             <Square className="w-3.5 h-3.5" />
@@ -148,7 +148,7 @@ export const PdfEditor: React.FC<PdfEditorProps> = ({ file, onEditsChange }) => 
               value={textInput}
               onChange={(e) => setTextInput(e.target.value)}
               placeholder="Text to stamp..."
-              className="px-2.5 py-1 text-xs bg-[#111622] border border-white/[0.08] rounded-lg text-[#F8FAFC] w-36"
+              className="px-2.5 py-1 text-xs bg-[var(--surface-subtle)] border border-[var(--border)] rounded-lg text-[var(--text-primary)] w-36 focus:outline-none focus:border-[var(--accent)]"
             />
             <div className="flex items-center space-x-1">
               <input
@@ -158,22 +158,22 @@ export const PdfEditor: React.FC<PdfEditorProps> = ({ file, onEditsChange }) => 
                 className="w-5 h-5 rounded border-0 bg-transparent cursor-pointer"
                 title="Text Color"
               />
-              <span className="text-[11px] text-[#64748B] font-mono">{fontSize}pt</span>
+              <span className="text-[11px] text-[var(--text-muted)] font-mono">{fontSize}pt</span>
             </div>
           </div>
         )}
 
         {/* Page Selector */}
         {pages.length > 1 && (
-          <div className="flex items-center space-x-2 text-xs text-[#94A3B8]">
+          <div className="flex items-center space-x-2 text-xs text-[var(--text-secondary)]">
             <span className="text-[11px]">Page:</span>
             <select
               value={selectedPageIndex}
               onChange={(e) => setSelectedPageIndex(parseInt(e.target.value, 10))}
-              className="bg-[#111622] text-[#F8FAFC] border border-white/[0.08] rounded-lg px-2 py-1 text-xs"
+              className="bg-[var(--surface-subtle)] text-[var(--text-primary)] border border-[var(--border)] rounded-lg px-2 py-1 text-xs focus:border-[var(--accent)] focus:outline-none"
             >
               {pages.map((p, idx) => (
-                <option key={idx} value={idx} className="bg-[#0A0D14] text-[#F8FAFC]">
+                <option key={idx} value={idx} className="bg-[var(--surface)] text-[var(--text-primary)]">
                   Page {p.pageNumber} of {pages.length}
                 </option>
               ))}
@@ -183,7 +183,7 @@ export const PdfEditor: React.FC<PdfEditorProps> = ({ file, onEditsChange }) => 
       </div>
 
       {/* Interactive Page Canvas View */}
-      <div className="relative flex justify-center bg-[#0A0D14] p-6 rounded-2xl border border-white/[0.08] overflow-auto min-h-[400px]">
+      <div className="relative flex justify-center bg-[var(--surface-subtle)] p-6 rounded-2xl border border-[var(--border)] overflow-auto min-h-[400px]">
         {currentPage && (
           <div
             ref={pageContainerRef}
@@ -234,7 +234,7 @@ export const PdfEditor: React.FC<PdfEditorProps> = ({ file, onEditsChange }) => 
         )}
       </div>
 
-      <p className="text-center text-xs text-slate-400">
+      <p className="text-center text-xs text-[var(--text-muted)]">
         Click anywhere on the document page above to place your selected {toolMode}.
       </p>
     </div>

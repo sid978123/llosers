@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Navbar } from "./components/Navbar";
 import { HomePage } from "./components/HomePage";
-import { ToolRunner } from "./components/ToolRunner";
+import { ToolPage } from "./components/ToolPage";
 import { AllToolsModal } from "./components/AllToolsModal";
 import { Footer } from "./components/Footer";
+import { ThemeProvider } from "./context/ThemeContext";
 import {
-  TOOLS_REGISTRY,
   getToolByRoute,
   type ToolDefinition,
   type ToolCategory,
 } from "./registry/tools";
+import {
+  HOME_SEO_DATA,
+  CATEGORY_SEO_DATA,
+  TOOL_SEO_DATA,
+  updateSeoMetadata,
+  generateHomeJsonLd,
+  generateCategoryJsonLd,
+  generateToolJsonLd,
+} from "./utils/seo";
 
-export function App() {
+function AppContent() {
   const [currentTool, setCurrentTool] = useState<ToolDefinition | null>(null);
   const [isAllToolsOpen, setIsAllToolsOpen] = useState<boolean>(false);
   const [homeCategoryFilter, setHomeCategoryFilter] = useState<
@@ -22,16 +31,52 @@ export function App() {
   useEffect(() => {
     const handleLocation = () => {
       const pathname = window.location.pathname;
+      const origin = window.location.origin;
+
+      if (pathname === "/pdf-tools") {
+        setCurrentTool(null);
+        setHomeCategoryFilter("pdf");
+        updateSeoMetadata({
+          ...CATEGORY_SEO_DATA.pdf,
+          jsonLd: generateCategoryJsonLd("pdf", origin),
+        });
+        return;
+      }
+
+      if (pathname === "/image-tools") {
+        setCurrentTool(null);
+        setHomeCategoryFilter("image");
+        updateSeoMetadata({
+          ...CATEGORY_SEO_DATA.image,
+          jsonLd: generateCategoryJsonLd("image", origin),
+        });
+        return;
+      }
+
       if (pathname && pathname !== "/") {
         const found = getToolByRoute(pathname);
         if (found) {
           setCurrentTool(found);
-          document.title = `${found.name} — llosers PDF & Image Suite`;
+          const seo = TOOL_SEO_DATA[found.id];
+          if (seo) {
+            updateSeoMetadata({
+              title: seo.title,
+              description: seo.description,
+              keywords: seo.keywords,
+              canonical: found.route,
+              jsonLd: generateToolJsonLd(found, seo, origin),
+            });
+          }
           return;
         }
       }
+
       setCurrentTool(null);
-      document.title = "llosers — Modern PDF & Image Utility Platform";
+      setHomeCategoryFilter("all");
+      updateSeoMetadata({
+        ...HOME_SEO_DATA,
+        jsonLd: generateHomeJsonLd(origin),
+      });
     };
 
     handleLocation();
@@ -54,7 +99,16 @@ export function App() {
   const handleSelectTool = (tool: ToolDefinition) => {
     setCurrentTool(tool);
     window.history.pushState(null, "", tool.route);
-    document.title = `${tool.name} — llosers PDF & Image Suite`;
+    const seo = TOOL_SEO_DATA[tool.id];
+    if (seo) {
+      updateSeoMetadata({
+        title: seo.title,
+        description: seo.description,
+        keywords: seo.keywords,
+        canonical: tool.route,
+        jsonLd: generateToolJsonLd(tool, seo, window.location.origin),
+      });
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -62,19 +116,28 @@ export function App() {
     setCurrentTool(null);
     setHomeCategoryFilter("all");
     window.history.pushState(null, "", "/");
-    document.title = "llosers — Modern PDF & Image Utility Platform";
+    updateSeoMetadata({
+      ...HOME_SEO_DATA,
+      jsonLd: generateHomeJsonLd(window.location.origin),
+    });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleNavigateCategory = (category: ToolCategory) => {
     setCurrentTool(null);
     setHomeCategoryFilter(category);
-    window.history.pushState(null, "", "/");
+    const targetRoute = category === "pdf" ? "/pdf-tools" : "/image-tools";
+    window.history.pushState(null, "", targetRoute);
+    const seo = CATEGORY_SEO_DATA[category];
+    updateSeoMetadata({
+      ...seo,
+      jsonLd: generateCategoryJsonLd(category, window.location.origin),
+    });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[#171717] text-[#F8FAFC] selection:bg-[#00AB80]/25 selection:text-[#E6FFFA] font-sans antialiased">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text-primary)] selection:bg-[#00AB80]/25 selection:text-[#008765] font-sans antialiased transition-colors duration-200 flex flex-col">
       {/* Top Navbar */}
       <Navbar
         onOpenAllTools={() => setIsAllToolsOpen(true)}
@@ -86,13 +149,19 @@ export function App() {
       {/* Main Content Area */}
       <main className="flex-1">
         {currentTool ? (
-          <ToolRunner tool={currentTool} onBack={handleNavigateHome} />
+          <ToolPage
+            tool={currentTool}
+            onBack={handleNavigateHome}
+            onSelectTool={handleSelectTool}
+            onNavigateCategory={handleNavigateCategory}
+          />
         ) : (
           <HomePage
             key={homeCategoryFilter}
             onSelectTool={handleSelectTool}
             onOpenAllTools={() => setIsAllToolsOpen(true)}
             initialCategoryFilter={homeCategoryFilter}
+            onNavigateCategory={handleNavigateCategory}
           />
         )}
       </main>
@@ -111,6 +180,14 @@ export function App() {
         onNavigateHome={handleNavigateHome}
       />
     </div>
+  );
+}
+
+export function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

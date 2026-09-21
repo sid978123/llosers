@@ -95,17 +95,17 @@ export const SignaturePad: React.FC<SignaturePadProps> = ({ onSignatureCapture }
   };
 
   return (
-    <div className="p-4 bg-[#0E131F] rounded-2xl border border-white/[0.08] space-y-4">
+    <div className="p-4 bg-[var(--surface)] rounded-2xl border border-[var(--border)] shadow-[var(--card-shadow)] space-y-4 transition-colors duration-200">
       {/* Tabs: Draw vs Type */}
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+      <div className="flex items-center justify-between border-b border-[var(--border)] pb-3">
         <div className="flex items-center space-x-1.5">
           <button
             type="button"
             onClick={() => setMode('draw')}
             className={`flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
               mode === 'draw'
-                ? 'bg-[#161D2B] border border-[#00AB80]/50 text-[#00AB80]'
-                : 'bg-[#111622] border border-white/[0.08] text-[#94A3B8] hover:text-white'
+                ? 'bg-[var(--surface-hover)] border border-[var(--accent)]/50 text-[var(--accent)] shadow-sm'
+                : 'bg-[var(--surface-subtle)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
             }`}
           >
             <Pen className="w-3.5 h-3.5" />
@@ -116,8 +116,8 @@ export const SignaturePad: React.FC<SignaturePadProps> = ({ onSignatureCapture }
             onClick={() => setMode('type')}
             className={`flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
               mode === 'type'
-                ? 'bg-[#161D2B] border border-[#00AB80]/50 text-[#00AB80]'
-                : 'bg-[#111622] border border-white/[0.08] text-[#94A3B8] hover:text-white'
+                ? 'bg-[var(--surface-hover)] border border-[var(--accent)]/50 text-[var(--accent)] shadow-sm'
+                : 'bg-[var(--surface-subtle)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]'
             }`}
           >
             <Type className="w-3.5 h-3.5" />
@@ -131,7 +131,7 @@ export const SignaturePad: React.FC<SignaturePadProps> = ({ onSignatureCapture }
             type="button"
             onClick={() => setColor('#0f172a')}
             className={`w-5 h-5 rounded-full bg-slate-900 border-2 transition-all cursor-pointer ${
-              color === '#0f172a' ? 'border-[#00AB80] scale-110' : 'border-transparent'
+              color === '#0f172a' ? 'border-[var(--accent)] scale-110' : 'border-transparent'
             }`}
             title="Black Ink"
           />
@@ -139,7 +139,7 @@ export const SignaturePad: React.FC<SignaturePadProps> = ({ onSignatureCapture }
             type="button"
             onClick={() => setColor('#1e40af')}
             className={`w-5 h-5 rounded-full bg-blue-800 border-2 transition-all cursor-pointer ${
-              color === '#1e40af' ? 'border-[#00AB80] scale-110' : 'border-transparent'
+              color === '#1e40af' ? 'border-[var(--accent)] scale-110' : 'border-transparent'
             }`}
             title="Blue Ink"
           />
@@ -148,7 +148,7 @@ export const SignaturePad: React.FC<SignaturePadProps> = ({ onSignatureCapture }
 
       {mode === 'draw' ? (
         <div>
-          <div className="relative border border-white/20 rounded-xl bg-white overflow-hidden shadow-inner">
+          <div className="relative border border-[var(--border)] rounded-xl bg-white overflow-hidden shadow-inner">
             <canvas
               ref={canvasRef}
               width={480}
@@ -172,7 +172,7 @@ export const SignaturePad: React.FC<SignaturePadProps> = ({ onSignatureCapture }
             <button
               type="button"
               onClick={clearCanvas}
-              className="flex items-center space-x-1 text-xs text-slate-400 hover:text-rose-400 px-2 py-1 rounded hover:bg-white/5"
+              className="flex items-center space-x-1 text-xs text-[var(--text-secondary)] hover:text-red-500 px-2 py-1 rounded hover:bg-[var(--surface-hover)] transition-colors cursor-pointer"
             >
               <Eraser className="w-3.5 h-3.5" />
               <span>Clear signature</span>
@@ -186,10 +186,10 @@ export const SignaturePad: React.FC<SignaturePadProps> = ({ onSignatureCapture }
             value={typedName}
             onChange={(e) => handleTypeChange(e.target.value)}
             placeholder="Type your full name..."
-            className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 text-sm focus:outline-none focus:border-indigo-500"
+            className="w-full px-3.5 py-2.5 bg-[var(--surface-subtle)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] text-sm focus:outline-none focus:border-[var(--accent)]"
           />
           {typedName && (
-            <div className="p-4 bg-white rounded-xl text-center border border-white/10 shadow-inner">
+            <div className="p-4 bg-white rounded-xl text-center border border-[var(--border)] shadow-inner">
               <p
                 style={{
                   fontFamily: 'cursive, "Brush Script MT"',
