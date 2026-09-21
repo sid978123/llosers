@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Navbar } from "./components/Navbar";
 import { HomePage } from "./components/HomePage";
 import { ToolPage } from "./components/ToolPage";
@@ -19,6 +19,7 @@ import {
   generateCategoryJsonLd,
   generateToolJsonLd,
 } from "./utils/seo";
+import { trackPageView } from "./utils/analytics";
 
 function AppContent() {
   const [currentTool, setCurrentTool] = useState<ToolDefinition | null>(null);
@@ -26,8 +27,9 @@ function AppContent() {
   const [homeCategoryFilter, setHomeCategoryFilter] = useState<
     ToolCategory | "all"
   >("all");
+  const isFirstLoad = useRef(true);
 
-  // Handle URL route synchronization
+  // Handle URL route synchronization (initial load and browser back/forward)
   useEffect(() => {
     const handleLocation = () => {
       const pathname = window.location.pathname;
@@ -40,6 +42,11 @@ function AppContent() {
           ...CATEGORY_SEO_DATA.pdf,
           jsonLd: generateCategoryJsonLd("pdf", origin),
         });
+        if (isFirstLoad.current) {
+          isFirstLoad.current = false;
+        } else {
+          trackPageView("/pdf-tools", CATEGORY_SEO_DATA.pdf.title);
+        }
         return;
       }
 
@@ -50,6 +57,11 @@ function AppContent() {
           ...CATEGORY_SEO_DATA.image,
           jsonLd: generateCategoryJsonLd("image", origin),
         });
+        if (isFirstLoad.current) {
+          isFirstLoad.current = false;
+        } else {
+          trackPageView("/image-tools", CATEGORY_SEO_DATA.image.title);
+        }
         return;
       }
 
@@ -58,6 +70,7 @@ function AppContent() {
         if (found) {
           setCurrentTool(found);
           const seo = TOOL_SEO_DATA[found.id];
+          const pageTitle = seo ? seo.title : `${found.name} — LosersPdf`;
           if (seo) {
             updateSeoMetadata({
               title: seo.title,
@@ -66,6 +79,11 @@ function AppContent() {
               canonical: found.route,
               jsonLd: generateToolJsonLd(found, seo, origin),
             });
+          }
+          if (isFirstLoad.current) {
+            isFirstLoad.current = false;
+          } else {
+            trackPageView(found.route, pageTitle);
           }
           return;
         }
@@ -77,6 +95,11 @@ function AppContent() {
         ...HOME_SEO_DATA,
         jsonLd: generateHomeJsonLd(origin),
       });
+      if (isFirstLoad.current) {
+        isFirstLoad.current = false;
+      } else {
+        trackPageView("/", HOME_SEO_DATA.title);
+      }
     };
 
     handleLocation();
@@ -100,6 +123,7 @@ function AppContent() {
     setCurrentTool(tool);
     window.history.pushState(null, "", tool.route);
     const seo = TOOL_SEO_DATA[tool.id];
+    const pageTitle = seo ? seo.title : `${tool.name} — LosersPdf`;
     if (seo) {
       updateSeoMetadata({
         title: seo.title,
@@ -109,6 +133,7 @@ function AppContent() {
         jsonLd: generateToolJsonLd(tool, seo, window.location.origin),
       });
     }
+    trackPageView(tool.route, pageTitle);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -120,6 +145,7 @@ function AppContent() {
       ...HOME_SEO_DATA,
       jsonLd: generateHomeJsonLd(window.location.origin),
     });
+    trackPageView("/", HOME_SEO_DATA.title);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -133,6 +159,7 @@ function AppContent() {
       ...seo,
       jsonLd: generateCategoryJsonLd(category, window.location.origin),
     });
+    trackPageView(targetRoute, seo.title);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
