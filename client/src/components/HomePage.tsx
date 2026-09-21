@@ -24,7 +24,7 @@ import {
   type ToolCategory,
 } from "../registry/tools";
 import heroBackground from "../assets/hero-night-runner.png";
-
+import roboGirlPdf from "../assets/robo-girl-pdf.png";
 interface HomePageProps {
   onSelectTool: (tool: ToolDefinition) => void;
   onOpenAllTools: () => void;
@@ -40,7 +40,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   const [activeCategory, setActiveCategory] = useState<ToolCategory | "all">(
     initialCategoryFilter,
   );
-
+  const [heartBroken, setHeartBroken] = useState(false);
   const totalCount = getTotalToolsCount();
   const pdfCount = getPdfToolsCount();
   const imageCount = getImageToolsCount();
@@ -279,7 +279,20 @@ export const HomePage: React.FC<HomePageProps> = ({
                 text-[#64748B]
               "
                   >
-                    ⌘K
+                    <span
+                      className="
+    inline-block
+    cursor-pointer
+    transition-all duration-500
+    ease-[cubic-bezier(0.22,1,0.36,1)]
+    drop-shadow-[0_0_10px_rgba(255,50,70,0.9)]
+    hover:scale-110
+    hover:rotate-[12deg]
+    hover:-translate-y-[1px]
+  "
+                    >
+                      ❤️
+                    </span>
                   </div>
                 )}
               </div>
@@ -458,12 +471,15 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   <h2
                     className="
-          text-2xl
-          sm:text-3xl
-          font-semibold
-          tracking-[-0.03em]
-          text-white
-        "
+    text-[17px]
+    sm:text-[27px]
+    lg:text-[13px]
+    font-light
+    tracking-[1.0em]
+    leading-[0.95]
+    text-#FFFDE4
+    font-serif
+  "
                   >
                     {heroSlides[heroSlide].title}
                   </h2>
@@ -534,8 +550,8 @@ export const HomePage: React.FC<HomePageProps> = ({
     "
               >
                 <img
-                  src={heroSlides[(heroSlide + 1) % heroSlides.length].image}
-                  alt=""
+                  src={roboGirlPdf}
+                  alt="Robot girl running through a desert under the night sky"
                   className="
         absolute inset-0
         w-full h-full
@@ -592,14 +608,16 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                   <h3
                     className="
-          text-xl
-          sm:text-2xl
-          font-semibold
-          tracking-[-0.025em]
-          text-white
-        "
+    text-[17px]
+    sm:text-[27px]
+    lg:text-[13px]
+    font-light
+    tracking-[1.0em]
+    leading-[2]
+    text-#FFFDE4
+  "
                   >
-                    Convert Documents
+                    Convert Effortlessly.
                   </h3>
 
                   <p
@@ -608,7 +626,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           text-xs
           sm:text-sm
           leading-relaxed
-          text-white/60
+          text-#FFFDE4
         "
                   >
                     Turn your files into the format you need.
@@ -705,23 +723,23 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div>
                   <div className="flex items-start justify-between mb-3.5">
                     {/* Quiet Icon Container */}
-                    <div className="w-9 h-9 rounded-lg bg-[#0D121A] border border-[#1C2536] group-hover:border-[#2B384E] flex items-center justify-center text-[#94A3B8] group-hover:text-[#0EA5E9] transition-colors duration-150">
+                    <div className="w-9 h-9 rounded-lg bg-[#0D121A]  group-hover:border-[#2B384E] flex items-center justify-center text-[#94A3B8] group-hover:text-[#0EA5E9] transition-colors duration-150">
                       <Icon className="w-4 h-4" />
                     </div>
 
                     <div className="flex items-center space-x-1.5">
                       {tool.badge && (
                         <span
-                          className={`px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider rounded border ${
+                          className={`px-2 py-0.5 text-[9px] font-mono uppercase rounded border ${
                             tool.badge === "Popular"
-                              ? "bg-[#F59E0B]/10 text-[#F59E0B] border-[#F59E0B]/20"
-                              : "bg-[#0EA5E9]/10 text-[#38BDF8] border-[#0EA5E9]/20"
+                              ? "bg-[#F59E0B]/10 text-[#F59E0B] "
+                              : "bg-[#0EA5E9]/10 text-[#38BDF8] "
                           }`}
                         >
                           {tool.badge}
                         </span>
                       )}
-                      <span className="px-1.5 py-0.5 text-[9px] font-mono rounded bg-[#0D121A] text-[#64748B] border border-[#1C2536]">
+                      <span className="px-1.5 py-0.5 text-[9px] font-mono rounded bg-[#0D121A] text-[#64748B] ">
                         {tool.processingMethod === "client"
                           ? "In-Browser"
                           : "Server"}
@@ -729,7 +747,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     </div>
                   </div>
 
-                  <h3 className="text-sm font-semibold text-[#EDEDEE] group-hover:text-[#38BDF8] transition-colors flex items-center justify-between">
+                  <h3 className="text-sm font-semibold text-[#EDEDEE] group-hover:text-[#38BDF8] transition-colors flex items-center justify-between ">
                     <span>{tool.name}</span>
                     <ChevronRight className="w-3.5 h-3.5 text-[#64748B] group-hover:text-[#0EA5E9] transition-colors" />
                   </h3>

@@ -410,14 +410,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center space-x-2 px-3 py-1.5 text-xs text-[#94A3B8] bg-[#111622] hover:bg-[#161D2B] hover:text-white border border-white/[0.08] hover:border-white/[0.16] rounded-lg transition-colors cursor-pointer"
           >
             <Search className="w-3.5 h-3.5 text-[#64748B]" />
-            <span className="hidden sm:inline">Search tools...</span>
-            <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-[#0A0D14] border border-white/[0.08] text-[#94A3B8] rounded">
-              ⌘K
+            <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-mono  text-[#94A3B8] rounded">
+              Search tools..
+              <span className="inline-block drop-shadow-[0_0_4px_rgba(255,50,70,0.9)] drop-shadow-[0_0_10px_rgba(255,50,70,0.55)]">
+                ❤️
+              </span>
             </kbd>
           </button>
 
           {/* Ephemeral Privacy Badge */}
-
           {/* Mobile All Tools Button */}
           <button
             onClick={onOpenAllTools}
