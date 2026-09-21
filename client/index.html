@@ -1,18 +1,66 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
+    <meta
+      name="google-site-verification"
+      content="Q4fl4fstcFwTAIZNUkKnosksga2769HomBZjahbQ3Pc"
+    />
     <meta name="msvalidate.01" content="C08C8ACDBEBEC85342CBE5E530F0D060" />
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          var isDark = saved ? saved === "dark" : prefersDark;
+          if (isDark) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230ea5e9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300AB80' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>llosers — Ephemeral PDF & Image Utility Suite</title>
+    <title>
+      LosersPdf — Free, Fast &amp; Private Online PDF and Image Tools
+    </title>
     <meta
       name="description"
-      content="Ultra-fast, ephemeral, zero-database PDF and image utility platform. Merge, split, edit, compress, and convert with complete privacy."
+      content="Complete suite of 29 free PDF and image utilities. Merge, split, edit, compress, convert, and protect documents with zero database and in-memory privacy."
+    />
+    <meta
+      name="keywords"
+      content="pdf tools, image tools, free pdf editor, merge pdf, split pdf, convert pdf, compress image, private pdf utility, loserspdf"
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://loserspdf.vercel.app/" />
+    <meta property="og:site_name" content="LosersPdf" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="LosersPdf — Free, Fast &amp; Private Online PDF and Image Tools"
+    />
+    <meta
+      property="og:description"
+      content="Complete suite of 29 free PDF and image utilities. Merge, split, edit, compress, convert, and protect documents with zero database and in-memory privacy."
+    />
+    <meta property="og:url" content="https://loserspdf.vercel.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="LosersPdf — Free, Fast &amp; Private Online PDF and Image Tools"
+    />
+    <meta
+      name="twitter:description"
+      content="Complete suite of 29 free PDF and image utilities. Merge, split, edit, compress, convert, and protect documents with zero database and in-memory privacy."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,7 +70,7 @@
     />
   </head>
   <body
-    class="bg-[#080B10] text-[#EDEDEE] min-h-screen antialiased selection:bg-[#0EA5E9]/25 selection:text-[#F0FDFA]"
+    class="bg-[var(--bg)] text-[var(--text-primary)] min-h-screen antialiased selection:bg-[#00AB80]/25 selection:text-[#008765]"
   >
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
